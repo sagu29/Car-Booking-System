@@ -1,77 +1,113 @@
 package ENTITY;
 
+import java.util.Objects;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Car {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "car_model", nullable = false, unique = true, length = 50)
-	private String Model;
-	
-	@Column(name = "car_brand", nullable = false, length = 50)
-	private String brand;
-	
-	@Column(name = "car_price", nullable = false)
-	private long price;
-	
-	@Column(name = "car_availibilty", nullable = false)
-	private String availability;
+
+	@Column(name = "Car_name", nullable = false, unique = true, length = 50)
+	private String carName;
+
+	@Column(name = "Manufacturing_year", nullable = false)
+	int manufacturingYear;
+
+	@Column(name = "Car_price", nullable = false)
+	int carPrice;
+
+	@Column(name = "Car_brand", nullable = false, length = 10)
+	private String carBrand;
+
+	@ManyToMany(mappedBy = "orderCarSet")
+	private Set<Customer> customer;
 
 	public Car() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Car(int id, String model, String brand, long price, String availability) {
+	public Car(String stockName, int stockestdYear, int stockPrice, String stocksectorType, Set<Customer> customer) {
 		super();
-		this.id = id;
-		Model = model;
-		this.brand = brand;
-		this.price = price;
-		this.availability = availability;
+		this.carName = carName;
+		this.manufacturingYear = manufacturingYear;
+		this.carPrice = carPrice;
+		this.carBrand = carBrand;
+		this.customer = customer;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public String getModel() {
-		return Model;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setModel(String model) {
-		Model = model;
+	public String getCarName() {
+		return carName;
+	}
+
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
+
+	public int getManufacturingYear() {
+		return manufacturingYear;
+	}
+
+	public void setManufacturingYear(int manufacturingYear) {
+		this.manufacturingYear = manufacturingYear;
 	}
 
 	public String getBrand() {
-		return brand;
+		return carBrand;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setBrand(String carBrand) {
+		this.carBrand = carBrand;
 	}
 
-	public long getPrice() {
-		return price;
+	public Set<Customer> getCustomer() {
+		return customer;
 	}
 
-	public void setPrice(long price) {
-		this.price = price;
+	public void setCustomer(Set<Customer> customer) {
+		this.customer = customer;
 	}
 
-	public String getAvailability() {
-		return availability;
+	@Override
+	public int hashCode() {
+		return Objects.hash(carName);
 	}
 
-	public void setAvailability(String availability) {
-		this.availability = availability;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Car other = (Car) obj;
+		return Objects.equals(carName, other.carName);
+	}
+
+	public int getCarPrice() {
+		return carPrice;
+	}
+
+	public void setCarPrice(int stockPrice) {
+		this.carPrice = carPrice;
 	}
 	
 }
