@@ -25,7 +25,7 @@ public class MainUI {
 				AdminUI.addCar(sc);
 				break;
 			case 2:
-				AdminUI.viewCars();
+				AdminUI.viewCars(sc);
 				break;
 			case 3:
 				AdminUI.updateCarDetails(sc);

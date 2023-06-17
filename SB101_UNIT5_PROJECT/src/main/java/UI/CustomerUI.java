@@ -128,7 +128,7 @@ public class CustomerUI {
 			choice = sc.nextInt();
 			switch (choice) {
 			case 1:
-				AdminUI.viewCars();
+				AdminUI.viewCars(sc);
 				break;
 			case 2:
 				purchaseNewCar(sc);

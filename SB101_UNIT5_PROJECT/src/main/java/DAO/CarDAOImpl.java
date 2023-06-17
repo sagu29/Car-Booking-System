@@ -28,15 +28,15 @@ public class CarDAOImpl implements CarDAO {
 		EntityTransaction et = null;
 		try {
 			em = emf.createEntityManager();
-			// check if stock with same name exists
+			
 			Query query = em.createQuery("SELECT count(s) FROM Car s WHERE carName = :carName");
 			query.setParameter("carName", car.getCarName());
 			if ((Long) query.getSingleResult() > 0) {
-				// you are here means company with given name exists so throw exceptions
+
 				throw new SomeThingWentWrongException("Car already exists with name " + car.getCarName());
 			}
 
-			// you are here means no company with given name
+
 			et = em.getTransaction();
 			et.begin();
 			em.persist(car);
@@ -74,24 +74,24 @@ public class CarDAOImpl implements CarDAO {
 		EntityManager em = null;
 		try {
 			em = EMUtils.getEntityManager();
-			// check if company with company with given id exists
+			
 			Car carFromDB = em.find(Car.class, car.getId());
 
 			if (carFromDB == null) {
 				throw new NoRecordFoundException("No Car found with the given id " + car.getId());
 			}
 
-			// You are here means company exists with given id
+			// You are here means car exists with given id
 			// check if company is to be renamed
 			if (!carFromDB.getCarName().equals(car.getCarName())) {
-				// you are here means company is to be renamed, check for no existing company
+				// you are here means car is to be renamed, check for no existing car
 				// with new name.
-				// check if company with same name exists
+				// check if car with same name exists
 				Query query = em.createQuery("SELECT count(s) FROM Car s WHERE carName = :carName");
 
 				query.setParameter("stockName", car.getCarName());
 				if ((Long) query.getSingleResult() > 0) {
-					// you are here means company with given name exists so throw exceptions
+					// you are here means car with given name exists so throw exceptions
 					throw new SomeThingWentWrongException("Car already exists with name " + car.getCarName());
 				}
 			}
@@ -123,13 +123,13 @@ public class CarDAOImpl implements CarDAO {
 		EntityTransaction et = null;
 		try {
 			em = EMUtils.getEntityManager();
-			// check if company with company with given id exists
+			// check if car with given id exists
 			Car car = em.find(Car.class,id);
 			if (car == null) {
 				throw new NoRecordFoundException("No car found with the given id " + id);
 			}
 
-			// You are here means company exists with given id
+			// You are here means car exists with given id
 		
 			et = em.getTransaction();
 			et.begin();

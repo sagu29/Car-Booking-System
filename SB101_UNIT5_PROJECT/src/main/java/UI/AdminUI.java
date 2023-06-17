@@ -1,12 +1,9 @@
 package UI;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import ENTITY.Car;
-import ENTITY.Customer;
 import EXCEPTION.NoRecordFoundException;
 import EXCEPTION.SomeThingWentWrongException;
 import SERVICE.CarService;
@@ -39,7 +36,7 @@ public class AdminUI {
 		}
 	}
 
-	public static void viewCars() {
+	public static void viewCars(Scanner sc) {
 		// TODO Auto-generated method stub
 
 		CarService carService = new CarServiceImpl();
@@ -47,6 +44,43 @@ public class AdminUI {
 			List<Car> carList = carService.getCarList();
 			carList.forEach(car -> System.out.println("Id: " + car.getId() + " car Name:" + car.getCarName() + " car manufacturing Year:"
 							+ car.getManufacturingYear() + " car brand" + car.getBrand()));
+			
+			int ch;
+			do {
+				System.out.println("1. View Car By Assending Order of Car Price");
+				System.out.println("2. View Car By Desending Order of Car Price");
+				System.out.println("3. View Car By Assending Order of Manufacturing  Year");
+				System.out.println("4. View Car By Desending Order of Manufacturing Year");
+				System.out.println("0. Exit");
+
+				ch = sc.nextInt();
+				
+				switch(ch) {
+				case 1 : 
+					carList.stream().sorted((s1,s2) -> s1.getCarPrice() - s2.getCarPrice()).forEach(st -> System.out.println("Id: " + st.getId() + " car Name:" + st.getCarName() + " car Manufacturing Year:"
+							+ st.getManufacturingYear() + "  Brand Type:" + st.getBrand()+" CarPrice :"+st.getCarPrice()) );
+					System.out.println("\n");
+					break;
+				case 2:
+					carList.stream().sorted((s1,s2) -> s2.getCarPrice() - s1.getCarPrice()).forEach(st -> System.out.println("Id: " + st.getId() + " car Name:" + st.getCarName() + " car Manufacturing Year:"
+							+ st.getManufacturingYear() + "  Brand Type:" + st.getBrand()+" CarPrice :"+st.getCarPrice())  );
+					System.out.println("\n");
+					break;
+				case 3 : 
+					carList.stream().sorted((s1,s2) -> s1.getManufacturingYear() - s2.getManufacturingYear()).forEach(st -> System.out.println("Id: " + st.getId() + " car Name:" + st.getCarName() + " car Manufacturing Year:"
+							+ st.getManufacturingYear() + "  Brand Type:" + st.getBrand()+" CarPrice :"+st.getCarPrice()) );
+					System.out.println("\n");
+					break;
+				case 4:
+					carList.stream().sorted((s1,s2) -> s2.getManufacturingYear() - s1.getManufacturingYear()).forEach(st -> System.out.println("Id: " + st.getId() + " car Name:" + st.getCarName() + " car Manufacturing Year:"
+							+ st.getManufacturingYear() + "  Brand Type:" + st.getBrand()+" CarPrice :"+st.getCarPrice())  );
+					System.out.println("\n");
+					break;
+				default:
+					System.out.println("Enter Valid Choice");
+					System.out.println("\n");
+				}
+			} while (ch != 0);
 		} catch (SomeThingWentWrongException | NoRecordFoundException ex) {
 			System.out.println(ex.getMessage());
 		}
