@@ -1065,3 +1065,4 @@ org.eclipse.core.runtime.CoreException: Launch configuration MainUI references n
 2023-06-17 22:33:16,484 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2023-06-17 22:33:16,489 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-06-17 22:33:16,489 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ACCESS INFO\Desktop\used-wilderness-8557\SB101_UNIT5_PROJECT\src\test\resources
+2023-06-18 12:04:00,416 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
