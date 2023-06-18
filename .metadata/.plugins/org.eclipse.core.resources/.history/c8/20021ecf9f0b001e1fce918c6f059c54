@@ -1,0 +1,45 @@
+package SERVICE;
+
+import java.util.List;
+
+import DAO.CarDAO;
+import DAO.CarDAOImpl;
+import ENTITY.Car;
+import EXCEPTION.NoRecordFoundException;
+import EXCEPTION.SomeThingWentWrongException;
+
+public class CarServiceImpl {
+	
+
+	@Override
+	public void addCar(Car car) throws SomeThingWentWrongException {
+		CarDAO carDAO = new CarDAOImpl();
+		carDAO.addStock(car);
+	}
+
+	@Override
+	public List<Stock> getStockList() throws SomeThingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		
+		StockDAO stockDAO = new StockDAOImpl();
+		return stockDAO.getStockList();
+	}
+
+	@Override
+	public void updateStock(Stock stock) throws SomeThingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		StockDAO stockDAO = new StockDAOImpl();
+		stockDAO.updateStock(stock);
+		
+	}
+
+	@Override
+	public void DeleteStockById(int id) throws SomeThingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		StockDAO stockDAO = new StockDAOImpl();
+		stockDAO.DeleteStockById(id);
+		
+	}
+	
+
+}

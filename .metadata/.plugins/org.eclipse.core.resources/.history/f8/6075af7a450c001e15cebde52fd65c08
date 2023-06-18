@@ -1,0 +1,113 @@
+package UI;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+
+import ENTITY.Car;
+import EXCEPTION.NoRecordFoundException;
+import EXCEPTION.SomeThingWentWrongException;
+import SERVICE.CarService;
+import SERVICE.CarServiceImpl;
+import SERVICE.CustomerService;
+import SERVICE.CustomerServiceImpl;
+
+public class AdminUI {
+
+	public static void addCar(Scanner sc) {
+		// TODO Auto-generated method stub
+		System.out.print("Enter car name ");
+		String carName = sc.next();
+		System.out.print("Enter manufacturing year");
+		int manufacturingYear = sc.nextInt();
+		System.out.println("Enter car Price");
+		int carPrice = sc.nextInt();
+		System.out.print("Enter Brand ");
+		String carbrand = sc.next();
+		Car car = new Car(carName, manufacturingYear, carPrice, carbrand, new HashSet<>());
+
+//		Car car = new Car(carName, manufacturingYear, carPrice, carbrand, new HashSet<>());
+
+		CarService carService = new CarServiceImpl();
+		try {
+			carService.addCar(car);
+			System.out.println("Car added successfully");
+		} catch (SomeThingWentWrongException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+
+	public static void viewCars() {
+		// TODO Auto-generated method stub
+
+		CarService carService = new CarServiceImpl();
+		try {
+			List<Car> carList = carService.getCarList();
+			carList.forEach(car -> System.out
+					.println("Id: " + car.getId() + " car Name:" + car.getCarName() + " car manufacturing Year:"
+							+ car.getManufacturingYear() + " car brand" + car.getBrand()));
+		} catch (SomeThingWentWrongException | NoRecordFoundException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+
+	public static void updateCarDetails(Scanner sc) {
+		// TODO Auto-generated method stub
+		System.out.print("Enter id ");
+		int id = sc.nextInt();
+		System.out.print("Enter car name ");
+		String carName = sc.next();
+		System.out.print("Enter manufacturing year");
+		int manufacturingYear = sc.nextInt();
+		System.out.print("Enter Brand name ");
+		String carBrand = sc.next();
+
+		// code to create Company Entity object
+		Car car = new Car();
+		car.setId(id);
+		car.setCarName(carName);
+		car.setManufacturingYear(manufacturingYear);
+		car.setBrand(carBrand);
+
+		CarService carService = new CarServiceImpl();
+
+		try {
+			carService.updateCar(car);
+			System.out.println("car updated successfully");
+		} catch (SomeThingWentWrongException | NoRecordFoundException ex) {
+			System.out.println(ex.getMessage());
+		}
+
+	}
+
+	public static void DeleteCarById(Scanner sc) {
+		// TODO Auto-generated method stub
+		System.out.println("Enter Car Id");
+		int id = sc.nextInt();
+
+		CarService carService = new CarServiceImpl();
+		try {
+			carService.DeleteCarById(id);
+			System.out.println("Car Deleted Successfully");
+		} catch (SomeThingWentWrongException | NoRecordFoundException ex) {
+			System.out.println(ex.getMessage());
+		}
+
+	}
+
+	public static void viewAllCustomers(Scanner sc) {
+		// TODO Auto-generated method stub
+		try {
+			CustomerService customerService = new CustomerServiceImpl();
+			List<Object[]> customerList = customerService.getCustomerList();
+			for (Object obj[] : customerList) {
+				System.out.println("Name: " + obj[0] + " Username: " + obj[1] + " Date of Birth: " + obj[2]
+						);
+			}
+		} catch (SomeThingWentWrongException | NoRecordFoundException ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+	}
+
+}
