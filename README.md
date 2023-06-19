@@ -1,6 +1,6 @@
 # used-wilderness-8557
 
-# Car Management System
+# Car Booking System
 
 
 This project is a car management system implemented in Java using the DAO pattern and Hibernate. It provides functionality for administrators to add, view, update, and delete cars, as well as manage customer accounts.
